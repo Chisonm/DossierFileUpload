@@ -10,7 +10,7 @@ use Illuminate\Support\Number;
 
 /**
  * DossierFile Model
- * 
+ *
  * Represents a file uploaded as part of a VISA dossier.
  * Files are categorized by type and can be retrieved, grouped, and deleted.
  */
@@ -22,7 +22,9 @@ class DossierFile extends Model
      * File type constants
      */
     public const TYPE_PASSPORT = 'passport';
+
     public const TYPE_UTILITY_BILL = 'utility_bill';
+
     public const TYPE_OTHER = 'other';
 
     /**
@@ -43,7 +45,7 @@ class DossierFile extends Model
         'updated_at' => 'datetime',
     ];
 
-     /**
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
@@ -56,53 +58,54 @@ class DossierFile extends Model
         'mime_type',
         'size',
     ];
+
     /**
      * Get the file's publicly accessible URL.
      */
     protected function fileUrl(): Attribute
     {
         return Attribute::make(
-            get: fn(): string => Storage::url($this->file_path),
+            get: fn (): string => Storage::url($this->file_path),
         );
     }
 
-     /**
+    /**
      * Get the file size in human-readable format.
      */
     protected function humanSize(): Attribute
     {
         return Attribute::make(
-            get: fn(): string => Number::fileSize($this->size),
+            get: fn (): string => Number::fileSize($this->size),
         );
     }
 
-      /**
+    /**
      * Determine if the file is an image.
      */
     protected function isImage(): Attribute
     {
         return Attribute::make(
-            get: fn(): bool => str_starts_with($this->mime_type, 'image/'),
+            get: fn (): bool => str_starts_with($this->mime_type, 'image/'),
         );
     }
 
-     /**
+    /**
      * Determine if the file is a PDF.
      */
     protected function isPdf(): Attribute
     {
         return Attribute::make(
-            get: fn(): bool => $this->mime_type === 'application/pdf',
+            get: fn (): bool => $this->mime_type === 'application/pdf',
         );
     }
 
-     /**
+    /**
      * Get the file extension.
      */
     protected function fileExtension(): Attribute
     {
         return Attribute::make(
-            get: fn(): string => pathinfo($this->original_filename, PATHINFO_EXTENSION),
+            get: fn (): string => pathinfo($this->original_filename, PATHINFO_EXTENSION),
         );
     }
 
