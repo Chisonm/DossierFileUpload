@@ -188,7 +188,7 @@ class DossierFileServiceTest extends TestCase
         // Mock repository to return empty grouped files
         $this->mockRepository
             ->expects($this->once())
-            ->method('getFilesGroupedByType') 
+            ->method('getFilesGroupedByType')
             ->willReturn($emptyGroupedFiles);
 
         // Act
