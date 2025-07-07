@@ -84,3 +84,63 @@ The API will be available at http://localhost:8000.
 - `GET /api/dossier-files`: List all files grouped by type
 - `POST /api/dossier-files`: Upload a new file
 - `DELETE /api/dossier-files/{id}`: Delete a file
+
+## Frontend Setup
+
+### Prerequisites
+
+- Node.js 16 or higher
+- npm 
+
+### Installation
+
+1. Navigate to the frontend directory:
+
+```bash
+cd frontend
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Create environment file:
+
+```bash
+mkdir .env
+```
+
+4. Add Api base url
+
+```
+VITE_BASE_URL= "http://127.0.0.1:8000/api"
+```
+
+### Running the Frontend
+
+Start the React development server:
+
+```bash
+npm run dev
+```
+
+The application will be available at http://localhost:5173/.
+
+## Testing
+
+### Backend Tests
+
+The backend includes comprehensive tests:
+
+- Unit tests for models and services
+- Feature tests for API endpoints
+- Integration tests for complete workflows
+
+Run the tests:
+
+```bash
+cd backend
+php artisan test
+```
