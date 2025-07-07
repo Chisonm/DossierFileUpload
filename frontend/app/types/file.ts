@@ -1,11 +1,18 @@
+export interface ApiResponse<T> {
+  data: T;
+  message?: string;
+}
+
 export interface UploadedFile {
   id: string;
   filename: string;
-  originalName: string;
-  mimetype: string;
+  original_filename: string;
+  mime_type: string;
   size: number;
-  url: string;
-  uploadedAt: string;
+  file_url: string;
+  human_size: string;
+  file_path: string;
+  created_at: string;
 }
 
 export interface FileUploadResponse {
@@ -24,4 +31,4 @@ export interface DossierFilesResponse {
   message: string;
 }
 
-export type FileType = 'passport' | 'utility_bill' | 'other';
+export type FileType = "passport" | "utility_bill" | "other";

@@ -1,61 +1,40 @@
-import { HTTP_OK, HTTP_REQUEST_ENTITY_TOO_LARGE } from "~/constants/statusCode";
 import type {
   DossierFilesResponse,
   FileUploadResponse,
   FileType,
+  ApiResponse,
 } from "../types/file";
 import api from "./api";
-
-export interface ApiResponse<T> {
-  data: T;
-  message?: string;
-}
 
 export const uploadFile = async (
   file: File,
   fileType: FileType
 ): Promise<FileUploadResponse> => {
-  try {
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("file_type", fileType);
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("file_type", fileType);
 
-    const response = await api.post<ApiResponse<FileUploadResponse>>("/dossier-files", formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
+  const response = await api.post<ApiResponse<FileUploadResponse>>(
+    `/api/dossier-files`,
+    formData,
+    {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
 
-    return response.data.data;
-  } catch (error) {
-    throw error;
-  }
+  return response.data.data;
 };
 
 export const getDossierFiles = async (): Promise<DossierFilesResponse> => {
-  try {
-    const response = await api.get<ApiResponse<DossierFilesResponse>>(
-      "/dossier-files"
-    );
-
-    return response.data.data;
-  } catch (error) {
-    throw error;
-  }
+  const response = await api.get<DossierFilesResponse>(
+    `/api/dossier-files`
+  );
+  return response.data;
 };
 
 export const deleteFile = async (fileId: string): Promise<void> => {
-  try {
-       await api.delete<ApiResponse<void>>(`/dossier-files/${fileId}`,
-      {
-        method: "DELETE",
-      }
-    );
-    return;
-  } catch (error) {
-    console.error("Error deleting file:", error);
-    throw error;
-  }
+  await api.delete(`/api/dossier-files/${fileId}`);
 };
