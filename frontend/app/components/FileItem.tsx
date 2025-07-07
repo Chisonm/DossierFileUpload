@@ -1,4 +1,4 @@
-import { TrashIcon, EyeIcon, DocumentIcon } from "@heroicons/react/24/outline";
+import { TrashIcon, EyeIcon, DocumentIcon, PhotoIcon } from "@heroicons/react/24/outline";
 
 import { useDeleteFile } from "~/hooks/useFiles";
 import type { UploadedFile } from "~/types/file";
@@ -29,7 +29,8 @@ const FileItem = ({ file }: FileItemProps) => {
         {/* {file.file_url} */}
       <div className="flex justify-between items-center gap-2">
         <div className="flex items-center gap-x-1">
-          <DocumentIcon className="size-8 text-gray-400" />
+          {file.mime_type.startsWith('pdf') ? <DocumentIcon className="size-8 text-gray-400" /> :
+          <PhotoIcon className="size-8 text-gray-400" />}
           <div>
             <h3 className="font-medium text-gray-900 truncate w-[180px] text-sm">
               {file.original_filename || file.filename}
