@@ -42,6 +42,7 @@ class DossierFileController extends Controller
      */
     public function store(StoreDossierFileRequest $request): JsonResponse
     {
+
         try {
             $file = $this->dossierFileService->storeFile(
                 $request->file('file'),
