@@ -2,6 +2,8 @@
 
 A simplified VISA Dossier management system using Laravel (API-only) for the backend and React Router for the frontend.
 
+## Screenshot
+![Screenshot Description](./screenshots/Screenshot.png)
 ## Documentation
 
 ## Project Structure
